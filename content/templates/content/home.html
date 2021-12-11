@@ -1,15 +1,20 @@
 <!DOCTYPE html>
+{% load static %}
 
 <html lang="en">
 
     <head>
         <meta charset="UTF-8">
         <title>Tech Student UK - Home</title>
+        <link rel="shortcut icon" type="image/jpg" href="{% static 'content/images/favicon.jpg' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'content/style.css' %}">
     </head>
 
-
     <body>
-        <h1>Welcome</h1>
+        {% include 'content/navbar.html' %}
+        <div id="content">
+            <h1> Welcome</h1>
+        </div>
     </body>
 
 </html>

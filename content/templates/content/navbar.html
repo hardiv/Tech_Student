@@ -1,34 +1,25 @@
-<!-- https://www.makeuseof.com/responsive-navigation-bar-using-html-and-css/ -->
-
 {% load static %}
+
 <nav class="navbar">
+    <a href="/"><img id="logo" src="{% static 'content/images/logo.png' %}" alt="Tech Student UK"></a>
       <ul>
-        <li><a href="#"><img id="logo" src="{% static 'content/images/logo.png' %}" alt="Tech Student UK"></a></li>
-        <li class="selectable"><a href="#">GCSE</a></li>
-        <li class="selectable"><a href="#">A-Level</a>
+        <li class="selectable"><a href='gcse'>GCSE</a></li>
+        <li class="selectable"><a href="alevel">A-Level</a>
           <div class="sub-menu-1">
             <ul>
-              <li><a href="#">Exam Help</a></li>
-              <li><a href="#">Uni Advice</a></li>
+              <li><a href="alevel">Exam Help</a></li>
+              <li><a href="alevel">Uni Advice</a></li>
             </ul>
           </div>
         </li>
-        <li class="selectable"><a href="#">Super-Curricular</a></li>
-        <li class="selectable"><a href="#">Forum</a></li>
+        <li class="selectable"><a href="supercurr">Super-Curricular</a></li>
+        <li class="selectable"><a href="">ExamBase</a></li>
         <li class="selectable"><a href="#">Articles</a></li>
-        <li class="selectable"><a href="#">About</a>
+        <li class="selectable"><a href="about">About</a>
           <div class="sub-menu-1">
             <ul>
               <li><a href="#">Our Mission</a></li>
               <li><a href="#">Contact Us</a></li>
-            </ul>
-          </div>
-        </li>
-        <li class="selectable"><a href="#"><img id="profile-photo" src="{% static 'content/images/profile.png' %}" alt="Profile"></a>
-          <div class="sub-menu-1">
-            <ul>
-              <li><a href="#">My Profile</a></li>
-              <li><a href="#">Settings</a></li>
             </ul>
           </div>
         </li>

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- https://learndjango.com/tutorials/django-password-reset-tutorial -->
 {% load static %}
 
 <html lang="en">
@@ -15,13 +14,12 @@
         {% include 'exambase/navbar.html' %}
         <div id="content">
             <div id="submission">
-                <h2>Log In</h2>
+                <h2>Sign up</h2>
                 <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button type="submit">Log In</button>
+                    <button type="submit">Sign Up</button>
                 </form>
-                <p>New to ExamBase? <a href="/exambase/account/signup">Sign Up</a> here</p>
             </div>
         </div>
         {% include 'content/footer.html' %}

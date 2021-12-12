@@ -11,6 +11,5 @@ def home(request):
     return render(request, 'exambase/home.html')
 
 
-def login(request):
-    return render(request, 'exambase/login.html')
-
+def account(request):
+    return render(request, 'exambase/account.html')

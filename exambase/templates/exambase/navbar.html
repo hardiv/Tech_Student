@@ -1,13 +1,25 @@
 {% load static %}
 
 <nav class="navbar">
-    <li><a href="/exambase"><img id="logo" src="{% static 'exambase/images/logo.png' %}" alt="Exambase"></a></li>
+    {% if user.is_authenticated %}
+        <li><a href="{% url 'exambase:dashboard' %}"><img id="logo" src="{% static 'exambase/images/logo.png' %}" alt="Exambase"></a></li>
+    {% else %}
+        <li><a href="{% url 'exambase:home' %}"><img id="logo" src="{% static 'exambase/images/logo.png' %}" alt="Exambase"></a></li>
+    {% endif %}
     <ul>
         <li class="selectable"><a href="/">Back to Tech Student UK</a>
         <li class="selectable">
-            <a href="exambase/accounts/login/">
-                <img id="profile-photo" src="{% static 'exambase/images/profile.png' %}" alt="Profile">
-            </a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'exambase:account' %}">
+                    <img id="profile-photo" src="{% static 'exambase/images/profile.png' %}" alt="Profile">
+                    <p>Hi, {{ user.get_username }}</p>
+                </a>
+            {% else %}
+                <a href="/exambase/account/login">
+                    <img id="profile-photo" src="{% static 'exambase/images/profile.png' %}" alt="Profile">
+                    <p>Sign In</p>
+                </a>
+            {% endif %}
         </li>
     </ul>
 </nav>

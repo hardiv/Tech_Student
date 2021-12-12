@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Home | Exambase</title>
+        <link rel="shortcut icon" type="image/jpg" href="{% static 'content/images/favicon.jpg' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'content/style.css' %}">
+    </head>
+
+    <body>
+        {% include 'exambase/navbar.html' %}
+        <div id="content">
+            <h1>Account</h1>
+            <div id="textbox">
+                {% if user.is_authenticated %}
+                    <p><a href="{% url 'logout' %}">Log out</a></p>
+                {% else %}
+                <p><a href="{% url 'login' %}">Log in</a> to access this page</p>
+                {% endif %}
+            </div>
+        </div>
+        {% include 'content/footer.html' %}
+
+    </body>
+
+</html>

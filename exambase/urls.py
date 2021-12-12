@@ -6,5 +6,5 @@ app_name = 'exambase'
 urlpatterns = [
     path('', views.home, name="home"),
     path('dashboard', views.dashboard, name='dashboard'),
-    path('login', views.login, name="login")
+    path('account', views.account, name="account")
 ]

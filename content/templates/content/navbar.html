@@ -2,25 +2,30 @@
 
 <nav class="navbar">
     <a href="/"><img id="logo" src="{% static 'content/images/logo.png' %}" alt="Tech Student UK"></a>
-      <ul>
-        <li class="selectable"><a href='gcse'>GCSE</a></li>
-        <li class="selectable"><a href="alevel">A-Level</a>
-          <div class="sub-menu-1">
-            <ul>
-              <li><a href="alevel">Exam Help</a></li>
-              <li><a href="alevel">Uni Advice</a></li>
-            </ul>
-          </div>
+    <ul>
+        <li class="selectable"><a href='{% url 'content:gcse' %}'>GCSE</a></li>
+        <li class="selectable"><a href="{% url 'content:alevel' %}">A-Level</a>
+            <div class="sub-menu-1">
+                <ul>
+                    <li><a href="{% url 'content:alevel' %}">Exam Help</a></li>
+                    <li><a href="{% url 'content:alevel' %}">Uni Advice</a></li>
+                </ul>
+            </div>
         </li>
-        <li class="selectable"><a href="exambase">ExamBase</a></li>
+        {% if user.is_authenticated %}
+            <li class="selectable"><a href="{% url 'exambase:dashboard' %}">ExamBase</a></li>
+        {% else %}
+            <li class="selectable"><a href="{% url 'exambase:home' %}">ExamBase</a></li>
+        {% endif %}
+
         <li class="selectable"><a href="#">Articles</a></li>
-        <li class="selectable"><a href="about">About</a>
-          <div class="sub-menu-1">
-            <ul>
-              <li><a href="#">Our Mission</a></li>
-              <li><a href="#">Contact Us</a></li>
-            </ul>
-          </div>
+        <li class="selectable"><a href="{% url 'content:about' %}">About</a>
+            <div class="sub-menu-1">
+                <ul>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
         </li>
-      </ul>
+    </ul>
 </nav>

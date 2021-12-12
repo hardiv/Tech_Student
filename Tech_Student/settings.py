@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'content.apps.ContentConfig',
     'exambase.apps.ExambaseConfig',
+    'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
@@ -123,4 +124,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = '/exambase'
+LOGIN_REDIRECT_URL = '/exambase/dashboard'
+LOGOUT_REDIRECT_URL = '/exambase'

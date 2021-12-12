@@ -15,9 +15,5 @@ def alevel(request):
     return render(request, 'content/alevel.html')
 
 
-def supercurr(request):
-    return render(request, 'content/supercurr.html')
-
-
 def about(request):
     return render(request, 'content/about.html')

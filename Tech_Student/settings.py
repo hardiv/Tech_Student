@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'content.apps.ContentConfig',
+    'exambase.apps.ExambaseConfig',
 ]
 
 MIDDLEWARE = [

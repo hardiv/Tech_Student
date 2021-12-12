@@ -1,24 +1,10 @@
-<!DOCTYPE html>
-{% load static %}
+{% extends 'content/base.html' %}
 
-<html lang="en">
+{% block title %}Home | Tech Student UK{% endblock %}
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Home | Tech Student UK</title>
-        <link rel="shortcut icon" type="image/jpg" href="{% static 'content/images/favicon.jpg' %}"/>
-        <link rel="stylesheet" type="text/css" href="{% static 'content/style.css' %}">
-    </head>
-
-    <body>
-        {% include 'content/navbar.html' %}
-        <div id="content">
-            <h1>Welcome</h1>
-            <div id="textbox">
-                <p>Sample Text</p>
-            </div>
-        </div>
-        {% include 'content/footer.html' %}
-    </body>
-
-</html>
+{% block content %}
+<h1>Welcome</h1>
+<div id="textbox">
+    <p>This is the homepage</p>
+</div>
+{% endblock %}

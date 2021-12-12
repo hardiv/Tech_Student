@@ -9,3 +9,8 @@ def dashboard(request):
 
 def home(request):
     return render(request, 'exambase/home.html')
+
+
+def login(request):
+    return render(request, 'exambase/login.html')
+

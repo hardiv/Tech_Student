@@ -24,4 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('content.urls'), name="content"),
     path('exambase/', include('exambase.urls'), name="exambase"),
+    path('exambase/accounts/', include('django.contrib.auth.urls'))
 ]

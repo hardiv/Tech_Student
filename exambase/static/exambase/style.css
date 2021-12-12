@@ -7,7 +7,10 @@
 }
 
 body {
-    background-color: #1b1b1b;
+    background-image: url("images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
     height: auto;
@@ -47,8 +50,19 @@ a {
     color: #ffffff;
 }
 
+#submission {
+    background-color: #1f1f24;
+    color: #ffffff;
+    border-radius: 10px;
+    height: 300px;
+    width: 80%;
+    margin-top: 90px;
+    vertical-align: center;
+}
+
 
 /* Navigation Bar --------------------------------------------------------------------------------------------------- */
+
 .navbar {
     background-color: #1f1f24;
     text-align: center;
@@ -159,3 +173,4 @@ a {
     border-radius: 10px;
 }
 
+/* ------------------------------------------------------------------------------------------------------------------ */

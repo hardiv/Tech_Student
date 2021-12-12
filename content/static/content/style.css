@@ -27,6 +27,7 @@ a {
     margin-top: 0;
     margin-bottom: 5%;
     width: auto;
+    height: auto;
 }
 
 #content h1 {
@@ -59,6 +60,7 @@ a {
     height: 20px;
     color: #ffffff;
 }
+
 
 
 /* Navigation Bar --------------------------------------------------------------------------------------------------- */

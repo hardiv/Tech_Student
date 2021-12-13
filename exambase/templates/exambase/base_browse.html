@@ -5,15 +5,18 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Dashboard | Exambase</title>
+        <title>{% block title %}Exam | Topic Browser {% endblock %}</title>
         <link rel="shortcut icon" type="image/jpg" href="{% static 'content/images/favicon.jpg' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'content/style.css' %}">
     </head>
 
     <body>
         {% include 'exambase/navbar.html' %}
-        <div id="content">
-            <h1>Dashboard</h1>
+        <div id="browser">
+            <ul id="topics">
+                {% block content %}
+                {% endblock %}
+            </ul>
         </div>
         {% include 'content/footer.html' %}
     </body>

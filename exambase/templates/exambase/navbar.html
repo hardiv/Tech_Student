@@ -2,12 +2,19 @@
 
 <nav class="navbar">
     {% if user.is_authenticated %}
-        <li><a href="{% url 'exambase:dashboard' %}"><img id="logo" src="{% static 'exambase/images/logo.png' %}" alt="Exambase"></a></li>
+        <li><a href="{% url 'exambase:dashboard' %}">
+            <img id="logo" src="{% static 'exambase/images/logo.png' %}" alt="ExamBase">
+        </a></li>
     {% else %}
-        <li><a href="{% url 'exambase:home' %}"><img id="logo" src="{% static 'exambase/images/logo.png' %}" alt="Exambase"></a></li>
+        <li><a href="{% url 'exambase:home' %}">
+            <img id="logo" src="{% static 'exambase/images/logo.png' %}" alt="Exambase">
+        </a></li>
     {% endif %}
     <ul>
-        <li class="selectable"><a href="{% url 'content:home' %}">Back to Tech Student UK</a>
+        <li class="selectable"><a href="{% url 'content:home' %}">Back to Tech Student UK</a></li>
+        {% if user.is_authenticated %}
+            <li class="selectable"><a href="{% url 'exa' %}">Browse Questions</a></li>
+        {% endif %}
         <li class="selectable">
             {% if user.is_authenticated %}
                 <a href="{% url 'exambase:account' %}">

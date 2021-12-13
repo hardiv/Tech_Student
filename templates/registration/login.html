@@ -21,7 +21,7 @@
                     {{ form.as_p }}
                     <button type="submit">Log In</button>
                 </form>
-                <p>New to ExamBase? <a href="/exambase/account/signup">Sign Up</a> here</p>
+                <p>New to ExamBase? <a href="{% url 'signup'%}">Sign Up</a> here</p>
             </div>
         </div>
         {% include 'content/footer.html' %}

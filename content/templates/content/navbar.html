@@ -1,9 +1,11 @@
 {% load static %}
 
 <nav class="navbar">
-    <a href="/"><img id="logo" src="{% static 'content/images/logo.png' %}" alt="Tech Student UK"></a>
+    <a href="{% url 'content:home' %}">
+        <img id="logo" src="{% static 'content/images/logo.png' %}" alt="Tech Student UK">
+    </a>
     <ul>
-        <li class="selectable"><a href='{% url 'content:gcse' %}'>GCSE</a></li>
+        <li class="selectable"><a href="{% url 'content:gcse' %}">GCSE</a></li>
         <li class="selectable"><a href="{% url 'content:alevel' %}">A-Level</a>
             <div class="sub-menu-1">
                 <ul>
@@ -17,7 +19,6 @@
         {% else %}
             <li class="selectable"><a href="{% url 'exambase:home' %}">ExamBase</a></li>
         {% endif %}
-
         <li class="selectable"><a href="#">Articles</a></li>
         <li class="selectable"><a href="{% url 'content:about' %}">About</a>
             <div class="sub-menu-1">

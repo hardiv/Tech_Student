@@ -2,13 +2,13 @@
 
 <nav class="navbar">
     {% if user.is_authenticated %}
-        <li><a href="{% url 'exambase:dashboard' %}">
+        <a href="{% url 'exambase:dashboard' %}">
             <img id="logo" src="{% static 'exambase/images/logo.png' %}" alt="ExamBase">
-        </a></li>
+        </a>
     {% else %}
-        <li><a href="{% url 'exambase:home' %}">
+        <a href="{% url 'exambase:home' %}">
             <img id="logo" src="{% static 'exambase/images/logo.png' %}" alt="Exambase">
-        </a></li>
+        </a>
     {% endif %}
     <ul>
         <li class="selectable"><a href="{% url 'content:home' %}">Back to Tech Student UK</a></li>

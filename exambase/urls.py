@@ -8,5 +8,7 @@ urlpatterns = [
     path('account', views.account, name="account"),
     path('exams', views.exams, name="exams"),
     path('tmua', views.tmua_topic_detail_view, name="tmua"),
-    path('create', views.question_create_view, name="create")
+    path('create', views.question_create_view, name="create"),
+    path('question/<int:q_id>/', views.question_detail_view, name="question")
 ]
+

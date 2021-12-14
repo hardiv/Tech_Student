@@ -5,7 +5,7 @@
       <entry url="file://$PROJECT_DIR$">
         <entryData>
           <resourceRoots>
-            <path value="file://$PROJECT_DIR$/assets" />
+            <path value="file://$PROJECT_DIR$/exambase/static/exambase/assets" />
           </resourceRoots>
         </entryData>
       </entry>

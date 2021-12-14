@@ -1,0 +1,17 @@
+{% extends 'exambase/base_submission.html' %}
+{% load static %}
+
+{% block title %}Question | Tech Student UK{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h2>{{ question }}</h2>
+        <img width="100%" src="{% static image_path %}" alt="Question Image">
+        <form method="POST"> {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit Answer" />
+        </form>
+    {% else %}
+        <p>You are not authorised to access this page</p>
+    {% endif %}
+{% endblock %}

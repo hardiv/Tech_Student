@@ -4,10 +4,12 @@
 
 {% block content %}
     {% for obj in topic_objs %}
-        <li>{{ obj.topic }}</li>
+        <li>{{ obj }}</li>
         <ul>
-            {% for foo in bar %}
-                <li>foo</li>
+            {% for q_obj in question_objs %}
+                {% if q_obj.topic.id == obj.id %}
+                    <li><a href="{% url 'exambase:question' q_id=q_obj.id %}">{{ q_obj }}</a></li>
+                {% endif %}
             {% endfor %}
         </ul>
     {% endfor %}

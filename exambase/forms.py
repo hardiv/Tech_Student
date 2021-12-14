@@ -1,5 +1,5 @@
 from django import forms
-from .models import Question
+from .models import Question, Option
 
 
 class CreateQuestionForm(forms.ModelForm):
@@ -9,6 +9,11 @@ class CreateQuestionForm(forms.ModelForm):
             'topic',
             'exam',
             'exam_position',
-            'question_image_path'
         ]
 
+
+class QuestionAnswerForm(forms.Form):
+    q_obj = Question.objects.get(pk=1)
+    options = Option.objects.filter(question=q_obj.id)
+    choices = []
+    choice = forms.ChoiceField(choices=choices)

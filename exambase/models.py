@@ -17,39 +17,28 @@ class Topic(models.Model):
         return self.topic
 
 
-# def generate_path(exam, position):
-#     year = exam.year
-#     name = exam.paper
-#     return f"{name}_{year}_{position}"
-
-
 class Question(models.Model):
-    question_image_path = models.CharField(max_length=200)
     topic = models.ForeignKey("Topic", on_delete=models.CASCADE)
     exam = models.ForeignKey("Exam", on_delete=models.CASCADE)
     exam_position = models.PositiveIntegerField()
 
     def __str__(self):
-        return self.question_image_path
+        return f"{self.exam}, Q{self.exam_position}"
 
 
 class Option(models.Model):
     question = models.ForeignKey("Question", on_delete=models.CASCADE, related_name="options")
-    option = models.CharField("Choice", max_length=50)
-    position = models.IntegerField()
+    option = models.CharField("Choice", max_length=1)
     is_answer = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.option
+        return f"{self.question}, Option {self.option}"
 
     class Meta:
         unique_together = [
             # no duplicated option per question
             ("question", "option"),
-            # no duplicated position per question
-            ("question", "position")
         ]
-        ordering = ("position",)
 
 
 class Attempt(models.Model):

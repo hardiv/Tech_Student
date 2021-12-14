@@ -27,7 +27,7 @@ class Question(models.Model):
     question_image_path = models.CharField(max_length=200)
     topic = models.ForeignKey("Topic", on_delete=models.CASCADE)
     exam = models.ForeignKey("Exam", on_delete=models.CASCADE)
-    exam_position = models.IntegerField()
+    exam_position = models.PositiveIntegerField()
 
     def __str__(self):
         return self.question_image_path

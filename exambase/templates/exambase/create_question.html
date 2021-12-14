@@ -1,0 +1,17 @@
+{% extends 'exambase/base_submission.html' %}
+
+{% block title %}Admin | Create Question{% endblock %}
+
+{% block content %}
+    {% if user.id == 1 %}
+        <h2>Create Question</h2>
+        <form method="POST"> {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Create and Save" />
+        </form>
+        <p>Make sure the Image has been saved in the assets folder with the format
+        EXAM_20XX_POSITION.jpg</p>
+    {% else %}
+        <p>You are not authorised to access this page</p>
+    {% endif %}
+{% endblock %}

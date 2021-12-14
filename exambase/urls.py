@@ -8,5 +8,5 @@ urlpatterns = [
     path('dashboard', views.dashboard, name='dashboard'),
     path('account', views.account, name="account"),
     path('exams', views.exams, name="exams"),
-    path('tmua', views.tmua, name="tmua"),
+    path('tmua', views.tmua_topic_detail_view, name="tmua"),
 ]

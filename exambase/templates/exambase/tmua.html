@@ -1,9 +1,15 @@
 {% extends 'exambase/base_browse.html' %}
 
+
 {% block title %}TMUA | Topic Browser{% endblock %}
 
 {% block content %}
-    <li><a href="">Algebra</a></li>
-    <li>Geometry</li>
-    <li>Probability</li>
+    {% for obj in topic_objs %}
+        <li>{{ obj.topic }}</li>
+        <ul>
+            {% for foo in bar %}
+                <li>foo</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
 {% endblock %}

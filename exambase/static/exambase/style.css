@@ -118,11 +118,6 @@ a {
     background: #2d2d35;
 }
 
-.active, .navbar ul .selectable:last-child:hover {
-    border-radius: 0;
-    background: #1f1f24;
-}
-
 .sub-menu-1 {
     display: none;
 }

@@ -11,6 +11,13 @@
         </form>
         <p>Make sure the Image has been saved in the assets folder with the format
         EXAM_20XX_POSITION.jpg</p>
+        {% if success is not None %}
+            {% if success %}
+                <p>Question has been submitted to database successfully</p>
+            {% else %}
+                <p>Question already exists in database</p>
+            {% endif %}
+        {% endif %}
     {% else %}
         <p>You are not authorised to access this page</p>
     {% endif %}

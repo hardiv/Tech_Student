@@ -1,0 +1,17 @@
+{% extends 'exambase/base_browse.html' %}
+
+{% block title %}ExamBase | Exam Browser{% endblock %}
+
+{% block content %}
+    <div id="browser">
+        <h1>Exam Browser</h1>
+        <h2>Choose Exam:</h2>
+        <ul id="exams">
+            {% for exam in exams %}
+                <li style="list-style-type: none">
+                    <a href="{% url 'exambase:exam_q_browser' exam_name=exam %}">{{ exam }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

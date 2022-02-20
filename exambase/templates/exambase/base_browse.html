@@ -13,12 +13,8 @@
     <body>
         {% include 'exambase/navbar.html' %}
         <div id="content">
-        <div id="browser">
-            <ul id="topics">
-                {% block content %}
-                {% endblock %}
-            </ul>
-        </div>
+        {% block content %}
+        {% endblock %}
         </div>
         {% include 'content/footer.html' %}
     </body>

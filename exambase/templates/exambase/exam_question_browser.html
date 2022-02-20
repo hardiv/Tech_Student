@@ -1,0 +1,26 @@
+{% extends 'exambase/base_browse.html' %}
+
+{% block title %}{{ exam_name }} | Question Browser{% endblock %}
+
+{% block content %}
+    <div id="browser">
+        <h1>{{ exam_name }} Question Browser</h1>
+        <h3>Browse by Topic:</h3>
+        <ul>
+            {% for t_obj in topic_objs %}
+                <li style="list-style-type: none; padding-top: 0.5%">
+                    {{ t_obj }}:
+                </li>
+                <ul>
+                    {% for q_obj in question_objs %}
+                        {% if q_obj.topic.id == t_obj.id %}
+                            <li style="font-size: small; list-style-type: none; padding-left: 2.5%;">
+                                <a href="{% url 'exambase:question' q_id=q_obj.pk %}">{{ q_obj }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

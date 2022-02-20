@@ -16,6 +16,9 @@
             <h1>Account</h1>
             <div id="textbox">
                 {% if user.is_authenticated %}
+                    {% if user.is_admin %}
+                        <p><a href="{% url 'content:home' %}/admin"></a></p>
+                    {% endif %}
                     <p><a href="{% url 'logout' %}">Log out</a></p>
                 {% else %}
                 <p><a href="{% url 'login' %}">Log in</a> to access this page</p>

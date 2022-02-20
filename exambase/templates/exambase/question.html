@@ -6,11 +6,13 @@
 {% block content %}
     {% if user.is_authenticated %}
         <h2>{{ question }}</h2>
+        <p id="back_button"><a href="{% url 'exambase:exam_q_browser' exam_name="TMUA" %}">Back</a></p>
         <img width="100%" src="{% static image_path %}" alt="Question Image">
         <form method="POST"> {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Submit Answer" />
+            <input type="submit" value="Submit Answer"/>
         </form>
+        <p>{{ attempt }}</p>
     {% else %}
         <p>You are not authorised to access this page</p>
     {% endif %}

@@ -13,7 +13,7 @@
     <ul>
         <li class="selectable"><a href="{% url 'content:home' %}">Back to Tech Student UK</a></li>
         {% if user.is_authenticated %}
-            <li class="selectable"><a href="{% url 'exambase:exams' %}">Browse Questions</a></li>
+            <li class="selectable"><a href="{% url 'exambase:exam_browser' %}">Browse Questions</a></li>
         {% endif %}
         {% if user.id == 1 %}
             <li class="selectable"><a href="{% url 'exambase:create' %}">Create Question</a></li>

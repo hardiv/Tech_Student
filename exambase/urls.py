@@ -4,7 +4,7 @@ from . import views
 app_name = 'exambase'
 urlpatterns = [
     path('', views.home, name="home"),
-    path('dashboard', views.dashboard, name='dashboard'),
+    path('dashboard', views.dashboard_view, name='dashboard'),
     path('account', views.account, name="account"),
     path('exam_browser', views.exam_browser_view, name="exam_browser"),
     path('<str:exam_name>/', views.exam_question_browser_view, name="exam_q_browser"),

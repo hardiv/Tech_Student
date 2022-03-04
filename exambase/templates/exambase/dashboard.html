@@ -14,6 +14,43 @@
         {% include 'exambase/navbar.html' %}
         <div id="content">
             <h1>Dashboard</h1>
+            <div id="textbox">
+                <h2>Welcome, {{ user }}!</h2>
+                <div id="recommended-topics">
+                    {% if strong_topics %}
+                        <p>These are the topics that you perform the best in:</p>
+                        <ul>
+                            {% for topic in strong_topics %}
+                                <li style="font-size: small; list-style-type: none; padding-left: 2.5%;">{{ topic }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>We do not have enough data to tell you which topics you're good at.</p>
+                    {% endif %}
+                    {% if weak_topics %}
+                        <p>These are the topics that you don't perform so well in:</p>
+                        <ul>
+                            {% for topic in weak_topics %}
+                                <li style="font-size: small; list-style-type: none; padding-left: 2.5%;">{{topic}}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>We do not have enough data to tell you which topics you're weak in.</p>
+                    {% endif %}
+                    <div id="recommended-questions">
+                    {% if recommended_questions %}
+                        <p>To help with these topics, you could try some of these questions:</p>
+                        <ul>
+                            {% for question in recommended_questions %}
+                                <li style="font-size: small; list-style-type: none; padding-left: 2.5%;">{{question}}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>We do not have enough data to tell you which questions might help you. Attempt a few more questions to help our algorithm learn!</p>
+                    {% endif %}
+                </div>
+                </div>
+            </div>
         </div>
         {% include 'content/footer.html' %}
     </body>

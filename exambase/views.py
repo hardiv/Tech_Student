@@ -4,8 +4,20 @@ from exambase.utils import *
 from itertools import chain
 
 
-def dashboard(request):
-    return render(request, 'exambase/dashboard.html')
+def dashboard_view(request):
+    user  = request.user
+    attempts = get_attempts(user)
+    strong_topics, weak_topics, recommended_questions = [], [], []
+    if attempts is not None:
+        strong_topics, weak_topics = get_strong_and_weak_topics(attempts)
+        recommended_questions = recommend_questions(weak_topics, attempts)
+    context = {
+        'user': user,
+        'strong_topics': strong_topics,
+        'weak_topics': weak_topics,
+        'recommended_questions': recommended_questions
+    }
+    return render(request, 'exambase/dashboard.html', context)
 
 
 def home(request):
@@ -41,6 +53,7 @@ def exam_question_browser_view(request, exam_name):
 def create_question_view(request):
     form = CreateQuestionForm(request.POST or None)
     success = None
+    img_path = "format EXAM_20XX_POSITION.jpg"
     if form.is_valid():
         topic, exam, pos = form.cleaned_data['topic'], form.cleaned_data['exam'], form.cleaned_data['exam_position']
         if does_question_exist(topic, exam, pos):
@@ -49,10 +62,12 @@ def create_question_view(request):
             question = form.save()
             generate_options(form, question)
             success = True
+            img_path = f"name {get_q_img_rel_path(question.id)}"
 
     context = {
         'form': form,
-        'success': success
+        'success': success,
+        'path': img_path
     }
     return render(request, 'exambase/create_question.html', context)
 

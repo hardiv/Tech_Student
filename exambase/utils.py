@@ -3,7 +3,7 @@ from exambase.models import *
 import os
 
 
-def get_q_image_path(qId):
+def get_q_img_rel_path(qId):
     q_obj = Question.objects.get(pk=qId)
     examId = q_obj.exam.id
     exam_obj = Exam.objects.get(pk=examId)
@@ -15,6 +15,11 @@ def get_q_image_path(qId):
         rel_path = f"{paper_name.upper()}_{year.replace(' ', '-')}_{pos}.jpg"
     else:
         rel_path = f"{paper_name.upper()}_{year}_P{paper_num}_{pos}.jpg"
+    return rel_path
+
+
+def get_q_image_path(qId):
+    rel_path = get_q_img_rel_path(qId)
     path = "exambase" + os.path.sep + "assets" + os.path.sep + rel_path
     return path
 
@@ -30,16 +35,12 @@ def get_paper_names():
     return names
 
 
-def generate_url(q_id):
-    question = Question.objects.get(pk=q_id)
-    exam = question.exam
-    url = f"{exam.paper_name}/{exam.year}-{exam.paper_num}/q{question.exam_position}".lower()
-    # Convert the url all to lowercase so it stays consistent with the rest of the site
-    return url
-
-
 def save_attempt(q_id, form, user):
     attempt = "This question has not been attempted yet"
+    curr_question = Question.objects.get(pk=q_id)
+    attempt_num = get_no_of_attempts(curr_question, user)
+    if attempt_num > 0:
+        attempt = f"This question has been attempted {attempt_num} times"
     option = None
     correctAns = None
     if form.is_valid():
@@ -52,7 +53,6 @@ def save_attempt(q_id, form, user):
             correctAns = False
             print(f"{option} is Wrong")
         curr_question = Question.objects.get(pk=q_id)
-        print(curr_question)
         attempt_num = get_no_of_attempts(curr_question, user) + 1
         attempt = Attempt(question=curr_question, choice=option, user=user, is_correct=correctAns,
                           num_attempts=attempt_num)
@@ -104,20 +104,95 @@ def get_attempts(user):
     return Attempt.objects.filter(user=user)
 
 
+def get_max_attempt_id(attempts):
+    # return the maximum attempt id
+    return attempts.latest('id').id
+
+
+def get_last_n_attempts(n, filtered_attempts, max_id):
+    min_id = max_id - n
+    last_n_attempts = filtered_attempts.filter(pk__range=(min_id, max_id))
+    return last_n_attempts
+
+
 def get_no_of_attempts(question, user):
     attempts_made = get_attempts(user).filter(question=question)
     return len(attempts_made)
 
 
-def progress_tracker(user):
-    """
-    :param user: current user object
-    :return:
-    """
-    attempts = Attempt.objects.filter(user=user)
-    incorrect_attempts = attempts.filter(is_correct=False)
-    correct_attempts = attempts.filter(is_correct=True)
-    pass
+def q_attempted(question, attempts):
+    attempts_for_question = attempts.filter(question=question)
+    if len(attempts_for_question) == 0:
+        return False
+    return True
+
+
+def get_polarised_topics(attempts, polarisation):
+    if polarisation == 'strong':
+        polarised_attempts = attempts.filter(is_correct=True)
+    else:
+        polarised_attempts = attempts.filter(is_correct=False)
+    max_id = get_max_attempt_id(attempts)
+    polarised_attempts = get_last_n_attempts(10, polarised_attempts, max_id)
+    # Here 'polarised' means correct/incorrect or strong/weak
+    polarised_counts = {}
+    polarised_topics = {}
+
+    for attempt in polarised_attempts:
+        question = attempt.question
+        topic = question.topic
+        if topic in polarised_counts.keys():
+            polarised_counts[topic] += 1
+        else:
+            polarised_counts[topic] = 1
+
+    for topic in polarised_counts.keys():
+        count = polarised_counts[topic]
+        if count >= 3:
+            polarised_topics[topic] = count
+    return polarised_topics
+
+
+def get_strong_topics(attempts):
+    return get_polarised_topics(attempts, polarisation='strong')
+
+
+def get_weak_topics(attempts):
+    return get_polarised_topics(attempts, polarisation='weak')
+
+
+def get_strong_and_weak_topics(attempts):
+    strong_topics, weak_topics  = get_strong_topics(attempts), get_weak_topics(attempts)
+    for topic in strong_topics.keys():
+        if topic in weak_topics.keys():  # check if a strong topic has also been identified as weak
+            strong_count = strong_topics[topic]
+            weak_count = weak_topics[topic]
+            if weak_count >= strong_count:  # The topic is more weak than strong
+                del strong_topics[topic]
+            else:
+                del weak_topics[topic]
+    return list(strong_topics.keys()), list(weak_topics.keys())
+
+
+def is_q_exclusively_wrong(question, attempts):
+    for attempt in attempts:
+        attempt_q = attempt.question
+        if attempt_q == question:
+            if attempt.is_correct:
+                return False
+    return True
+
+
+def recommend_questions(weak_topics_list, attempts):
+    questions = []
+    for topic in weak_topics_list:
+        qs_to_add = Question.objects.filter(topic=topic)
+        for q in qs_to_add:
+            if not q_attempted(q, attempts):
+                questions.append(q)
+            if is_q_exclusively_wrong(q, attempts):
+                questions.append(q)
+    return questions
 
 
 def test():

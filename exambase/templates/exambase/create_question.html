@@ -9,8 +9,7 @@
             {{ form.as_p }}
             <input type="submit" value="Create and Save" />
         </form>
-        <p>Make sure the Image has been saved in the assets folder with the format
-        EXAM_20XX_POSITION.jpg</p>
+        <p>Make sure the Image has been saved in the assets folder with the {{ path }}</p>
         {% if success is not None %}
             {% if success %}
                 <p>Question has been submitted to database successfully</p>
